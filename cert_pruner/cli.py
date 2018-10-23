@@ -24,7 +24,6 @@ def main():
 
     parser.add_argument(
         '--delete',
-        '-d',
         help='Perform a dry run of the operations',
         action='store_true'
     )
