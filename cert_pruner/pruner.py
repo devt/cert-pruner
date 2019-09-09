@@ -98,7 +98,10 @@ class CertificatePruner(object):
                 distributions = self._cloudfront_client.list_distributions()
 
             # Loop through results and save all certificates IDs listed for IAM
-            for dist in distributions['DistributionList']['Items']:
+            items = []
+            if 'DistributionList' in distributions and 'Items' in distributions['DistributionList']:
+                items = distributions['DistributionList']['Items']
+            for dist in items:
                 if 'ViewerCertificate' in dist:
                     cert = dist['ViewerCertificate']
                     if 'iam' == cert['CertificateSource']:
